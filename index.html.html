@@ -212,34 +212,15 @@
   }
 
   function handleSubmit() {
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const amount = document.getElementById('amount').value;
-    const category = document.getElementById('category').value;
-    const expdate = document.getElementById('expdate').value;
-    const desc = document.getElementById('desc').value.trim();
-    const file = fi.files[0];
-    const missing = [];
-    if (!name) missing.push('name');
-    if (!email) missing.push('email');
-    if (!amount) missing.push('amount');
-    if (!category) missing.push('category');
-    if (!expdate) missing.push('date of expense');
-    if (!desc) missing.push('description');
-    if (!file) missing.push('bill attachment');
-    if (missing.length) { alert('Please fill in: ' + missing.join(', ')); return; }
-    if (!validateDate(document.getElementById('expdate'))) { alert('Please correct the expense date.'); return; }
-    const btn = document.getElementById('submit-btn');
-    btn.disabled = true; btn.textContent = 'Submitting…';
-    setTimeout(() => {
-      document.getElementById('form-card').style.display = 'none';
-      document.getElementById('success-card').classList.add('show');
-      const ref = 'EXP-' + Date.now().toString(36).toUpperCase();
-      document.getElementById('ref-num').textContent = 'Reference: ' + ref;
-      document.getElementById('success-msg').textContent =
-        name.split(' ')[0] + ', your ₹' + parseFloat(amount).toLocaleString('en-IN') +
-        ' expense has been uploaded to OneDrive and your manager has been notified.';
-    }, 900);
+    // Show success screen
+	document.getElementById('form-card').style.display = 'none';
+	document.getElementById('success-card').classList.add('show');
+	const ref = 'EXP-' + Date.now().toString(36).toUpperCase();
+	document.getElementById('ref-num').textContent = 'Reference: ' + ref;
+	document.getElementById('success-msg').textContent =
+  	name.split(' ')[0] + ', your expense has been logged. Your manager will be notified shortly.';
+// Open the backend Forms link in a new tab for actual submission
+window.open('PASTE_YOUR_MICROSOFT_FORMS_URL_HERE', '_blank');
   }
 
   function resetForm() {
